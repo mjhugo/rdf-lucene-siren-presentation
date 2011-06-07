@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Sparql Example</title>
+    <title>Lucene Example</title>
     <meta name="layout" content="main"/>
 </head>
 
@@ -12,9 +12,7 @@
 
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
-<g:if test="${time}">
-    <p>Query took <g:formatNumber number="${time/1000}" type="number"/>s</p>
-</g:if>
+<p>Query took <g:formatNumber number="${(time?:0)/1000}" type="number"/>s</p>
 <g:if test="${results}">
     <div class="list">
         <table>
