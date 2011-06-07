@@ -8,11 +8,9 @@
 
 <g:form action="query" method="GET">
     Query: <g:textField name="query" value="${params.query}" style="width: 400px;"/><br>
-    Type of match: <g:select name="type" from="['Exact', 'Partial']" value="${params.type}"/><br>
-
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
-<p>Query took <g:formatNumber number="${(time?:0)/1000}" type="number"/>s</p>
+<p>Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
 <g:if test="${results}">
     <div class="list">
         <table>

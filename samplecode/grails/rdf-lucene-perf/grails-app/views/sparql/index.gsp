@@ -13,7 +13,7 @@
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
 <g:if test="${time}">
-    <p>Query took <g:formatNumber number="${time/1000}" type="number"/>s</p>
+    <p>Query took <g:formatNumber number="${time}" type="number"/>ms</p>
 </g:if>
 <g:if test="${results}">
     <div class="list">

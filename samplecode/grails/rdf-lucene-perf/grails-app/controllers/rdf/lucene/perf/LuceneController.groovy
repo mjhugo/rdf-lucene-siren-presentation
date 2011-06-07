@@ -10,6 +10,8 @@ import org.apache.lucene.index.IndexWriter
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.search.IndexSearcher
 import org.apache.lucene.search.ScoreDoc
+import org.apache.lucene.queryParser.QueryParser
+import org.apache.lucene.util.Version
 
 class LuceneController {
 
@@ -28,14 +30,10 @@ class LuceneController {
     }
 
     def query = {
-        Query query
-
-        if (params.type == 'Exact') {
-            query = new PhraseQuery()
-            query.add(new Term(LABEL_FIELD, params.query))
-        } else {
-            query = new TermQuery(new Term(LABEL_FIELD, params.query))
-        }
+        Query query = new QueryParser(
+                Version.LUCENE_CURRENT,
+                LABEL_FIELD,
+                new StandardAnalyzer(Version.LUCENE_CURRENT)).parse(params.query);
 
         def s = new Date().time
         List results = executeQuery(query)
@@ -88,7 +86,7 @@ class LuceneController {
         }
 
         def e = new Date().time
-
+        luceneSearcherManager.maybeReopen()
         render "Done building index in ${e - s}ms"
     }
 }
