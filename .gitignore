@@ -13,3 +13,5 @@ sesame-example
 /samplecode/grails/rdf-lucene-perf/web-app/WEB-INF/tld/fmt.tld
 /samplecode/grails/rdf-lucene-perf/target/
 /samplecode/grails/rdf-lucene-perf/stacktrace.log
+/samplecode/grails/rdf-lucene-perf/rdf-lucene-perf-grailsPlugins.iml
+/samplecode/grails/rdf-lucene-perf/rdf-lucene-perf.iml

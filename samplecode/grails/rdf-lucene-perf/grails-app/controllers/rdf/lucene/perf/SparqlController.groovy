@@ -5,12 +5,30 @@ import org.openrdf.repository.RepositoryConnection
 import org.openrdf.query.TupleQuery
 import org.openrdf.query.BindingSet
 import org.openrdf.query.QueryLanguage
+import org.hibernate.cfg.QuerySecondPass
 
 class SparqlController {
 
     def repository
 
-    def index = { }
+    def index = {
+        render(view: 'index', model: [query: ''])
+    }
+
+    def query = {
+        String queryString = """
+        SELECT ?uri ?label WHERE {
+          ?uri rdfs:label ?label .
+          FILTER (?label = '${params.query}')
+        } LIMIT 10
+        """
+
+        def s = new Date().time
+        List results = executeQuery(queryString)
+        def e = new Date().time
+
+        render(view: 'index', model: [results: results, query: params.query, time: e - s])
+    }
 
     public List executeQuery(String queryString) {
         def startTime = new Date().time
