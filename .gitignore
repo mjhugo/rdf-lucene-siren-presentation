@@ -6,3 +6,10 @@
 /samplecode/examples/out/
 sesame-example
 .idea
+/samplecode/grails/rdf-lucene-perf/.classpath
+/samplecode/grails/rdf-lucene-perf/.project
+/samplecode/grails/rdf-lucene-perf/.settings/org.codehaus.groovy.eclipse.preferences.prefs
+/samplecode/grails/rdf-lucene-perf/web-app/WEB-INF/tld/c.tld
+/samplecode/grails/rdf-lucene-perf/web-app/WEB-INF/tld/fmt.tld
+/samplecode/grails/rdf-lucene-perf/target/
+/samplecode/grails/rdf-lucene-perf/stacktrace.log
