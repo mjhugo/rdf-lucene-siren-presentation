@@ -16,9 +16,6 @@ class TimingFilters {
                     } else if (request.requestURI.indexOf('siren') > 1) {
                         addTimingToSession('siren', model.time, session)
                     }
-                    println "actionName: $actionName time: $model.time"
-                    println request.requestURI
-                    println session
                 }
             }
             afterView = {
