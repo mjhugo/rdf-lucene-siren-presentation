@@ -5,10 +5,12 @@
 </head>
 
 <body>
+<P>All times in Milliseconds</P>
+<p><g:link action="clear">reset times</g:link></p>
 <table>
     <tr>
         <g:each in="${['sparql', 'lucene', 'siren']}" var="sessionVariable">
-            <td valign="top ">
+            <td valign="top">
                 <table>
                     <thead>
                     <tr>
@@ -21,6 +23,13 @@
                             <td>${timing}</td>
                         </tr>
                     </g:each>
+                    <g:if test="${session[sessionVariable]}">
+                        <tr>
+                            <td>Avg: <g:formatNumber
+                                    number="${session[sessionVariable].sum() / session[sessionVariable].size()}"
+                                    type="number"/></td>
+                        </tr>
+                    </g:if>
                     </tbody>
                 </table>
             </td>

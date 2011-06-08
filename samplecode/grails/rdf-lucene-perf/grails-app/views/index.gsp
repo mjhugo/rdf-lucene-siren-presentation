@@ -6,13 +6,7 @@
 
 <body>
 
-<h1>RDF Lucene Performance</h1>
-
-<ul>
-    <li><g:link controller="sparql">Sparql Example</g:link></li>
-    <li><g:link controller="lucene">Lucene Example</g:link></li>
-    <li><g:link controller="siren">Siren Example</g:link></li>
-</ul>
+<h1>RDF Lucene Performance Examples</h1>
 
 </body>
 </html>

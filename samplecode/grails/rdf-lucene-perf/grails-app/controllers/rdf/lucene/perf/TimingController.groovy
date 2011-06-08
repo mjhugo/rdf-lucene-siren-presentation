@@ -8,6 +8,7 @@ class TimingController {
         ['siren','lucene','sparql'].each{
             session[it] = []
         }
+        redirect action:'index'
     }
 
 }
