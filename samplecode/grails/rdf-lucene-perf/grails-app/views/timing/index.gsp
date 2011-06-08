@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${session[sessionVariable].sort().reverse()}" status="i" var="timing">
+                    <g:each in="${session[sessionVariable]?.sort()?.reverse()}" status="i" var="timing">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                             <td>${timing}</td>
                         </tr>

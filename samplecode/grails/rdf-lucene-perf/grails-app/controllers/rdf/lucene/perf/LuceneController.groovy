@@ -15,7 +15,6 @@ import org.apache.lucene.util.Version
 
 class LuceneController {
 
-    static final String TYPE_FIELD = 'type'
     static final String LABEL_FIELD = 'label'
     static final String SUBJECT_URI_FIELD = 'subjecturi'
 
@@ -68,20 +67,18 @@ class LuceneController {
 
         try {
 
-            String queryLabelsAndTypes = """
-               SELECT ?uri ?type ?label
+            String queryLabels = """
+               SELECT ?uri ?label
                WHERE {
-                   ?uri rdf:type ?type .
                    ?uri rdfs:label ?label .
                }
             """
 
-            sparqlQueryService.executeForEach(repository, queryLabelsAndTypes) {
+            sparqlQueryService.executeForEach(repository, queryLabels) {
                 def doc = new Document()
 
                 doc.add(new Field(SUBJECT_URI_FIELD, it.uri.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
                 doc.add(new Field(LABEL_FIELD, it.label.stringValue(), Field.Store.NO, Field.Index.ANALYZED))
-                doc.add(new Field(TYPE_FIELD, it.type.stringValue(), Field.Store.NO, Field.Index.ANALYZED))
 
                 writer.addDocument(doc)
             }

@@ -8,7 +8,7 @@ class TimingFilters {
 
             }
             after = {model ->
-                if (model.time != null) {
+                if (model && model.time != null) {
                     if (request.requestURI.indexOf('sparql') > 1) {
                         addTimingToSession('sparql', model.time, session)
                     } else if (request.requestURI.indexOf('lucene') > 1) {
