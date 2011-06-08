@@ -76,9 +76,13 @@ class LuceneController {
 
             sparqlQueryService.executeForEach(repository, queryLabels) {
                 def doc = new Document()
+                String uri = it.uri.stringValue()
+                String label = it.label.stringValue()
 
-                doc.add(new Field(SUBJECT_URI_FIELD, it.uri.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
-                doc.add(new Field(LABEL_FIELD, it.label.stringValue(), Field.Store.NO, Field.Index.ANALYZED))
+                doc.add(new Field(SUBJECT_URI_FIELD, uri,
+                        Field.Store.YES, Field.Index.ANALYZED))
+                doc.add(new Field(LABEL_FIELD, label,
+                        Field.Store.NO, Field.Index.ANALYZED))
 
                 writer.addDocument(doc)
             }

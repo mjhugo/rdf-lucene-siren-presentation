@@ -114,14 +114,12 @@ class SirenController {
 
         RepositoryConnection connection = repository.connection
         try {
-
             String subjectUris = """
                SELECT distinct ?uri
                WHERE {
                    ?uri ?p ?o .
                }
             """
-
             sparqlQueryService.executeForEach(repository, subjectUris) {
                 def doc = new Document()
 
