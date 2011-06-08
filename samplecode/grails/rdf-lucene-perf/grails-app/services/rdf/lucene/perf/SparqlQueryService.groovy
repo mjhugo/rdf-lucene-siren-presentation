@@ -83,5 +83,13 @@ class SparqlQueryService {
         }
     }
 
+    Map getLabelAndType(String subjectUri, RepositoryConnection connection) {
+        String query = """
+            SELECT ?label ?type WHERE {
+                {<${subjectUri}> rdf:type ?type} UNION {<${subjectUri}> rdfs:label ?label}
+            }
+        """
+        executeQuery(query).first()
+    }
 
 }

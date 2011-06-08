@@ -46,10 +46,14 @@ class LuceneController {
         IndexSearcher searcher = luceneSearcherManager.get()
         ScoreDoc[] scoreDocs = searcher.search(query, 10).scoreDocs
         List results = []
+        def connection = repository.connection
         scoreDocs.each {
             Document doc = searcher.doc(it.doc)
-            results << [uri: doc[SUBJECT_URI_FIELD], type: doc[TYPE_FIELD], label: doc[LABEL_FIELD]]
+            String uri = doc[SUBJECT_URI_FIELD]
+            Map labelAndType = sparqlQueryService.getLabelAndType(uri, connection)
+            results << [uri: uri, type: labelAndType.type, label: labelAndType.label]
         }
+        connection.close()
         return results
     }
 
@@ -75,9 +79,9 @@ class LuceneController {
             sparqlQueryService.executeForEach(repository, queryLabelsAndTypes) {
                 def doc = new Document()
 
-                doc.add(new Field(LABEL_FIELD, it.label.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
                 doc.add(new Field(SUBJECT_URI_FIELD, it.uri.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
-                doc.add(new Field(TYPE_FIELD, it.type.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
+                doc.add(new Field(LABEL_FIELD, it.label.stringValue(), Field.Store.NO, Field.Index.ANALYZED))
+                doc.add(new Field(TYPE_FIELD, it.type.stringValue(), Field.Store.NO, Field.Index.ANALYZED))
 
                 writer.addDocument(doc)
             }
