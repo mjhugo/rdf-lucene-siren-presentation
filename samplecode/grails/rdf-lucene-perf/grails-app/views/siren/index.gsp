@@ -8,6 +8,7 @@
 
 <g:form action="query" method="GET">
     Query: <g:textField name="query" value="${params.query}" style="width: 400px;"/><br>
+    Related SubjectURI: <g:textField name="relatedUri" value="${params.relatedUri}" style="width: 400px;"/><br>
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
 <p>Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
@@ -44,9 +45,6 @@
         <% def queryString = 'High affinity immunoglobulin epsilon receptor subunit alpha' %>
         <li><g:link action="query"
                     params="[query:queryString]">High affinity immunoglobulin epsilon receptor subunit alpha</g:link></li>
-        %{--<% queryString = 'Proto-oncogene tyrosine-protein kinase ABL1' %>--}%
-        %{--<li><g:link action="query"--}%
-                    %{--params="[query:queryString]">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>--}%
         <% queryString = 'Pyrin' %>
         <li><g:link action="query" params="[query:queryString]">Pyrin</g:link></li>
     </ul>
@@ -54,6 +52,16 @@
     <ul>
         <li><g:link action="query" params="[query:'epsilon']">epsilon</g:link></li>
         <li><g:link action="query" params="[query:'abl1']">abl1</g:link></li>
+        <li><g:link action="query" params="[query:'leukemia']">leukemia</g:link></li>
+    </ul>
+    <li>Related Queries</li>
+    <ul>
+        <li><g:link action="query"
+                    params="[query:'',
+                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities related to http://www4.wiwiss.fu-berlin.de/diseasome/page/diseases/673</g:link></li>
+        <li><g:link action="query"
+                    params="[query:'imatinib',
+                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities with the text "imatnib" in the label related to http://www4.wiwiss.fu-berlin.de/diseasome/page/diseases/673</g:link></li>
     </ul>
 </ul>
 <g:link action="buildIndex">Rebuild index</g:link>

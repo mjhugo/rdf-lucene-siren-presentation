@@ -5,9 +5,9 @@
 </head>
 
 <body>
-<P>All times in Milliseconds</P>
 
 <p><g:link action="clear">reset times</g:link></p>
+<P>All times in Milliseconds</P>
 <table>
     <tr>
         <g:each in="${['sparql', 'lucene', 'siren']}" var="sessionVariable">

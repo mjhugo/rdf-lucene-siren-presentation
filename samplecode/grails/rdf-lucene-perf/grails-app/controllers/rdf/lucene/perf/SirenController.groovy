@@ -21,6 +21,8 @@ import org.sindice.siren.search.SirenTermQuery
 import org.openrdf.model.vocabulary.RDFS
 import org.sindice.siren.search.SirenPrimitiveQuery
 import org.sindice.siren.search.SirenPhraseQuery
+import org.apache.lucene.search.BooleanQuery
+import org.apache.lucene.search.BooleanClause.Occur
 
 class SirenController {
     static final String TRIPLES_FIELD = 'triples'
@@ -53,9 +55,23 @@ class SirenController {
         SirenCellQuery objectCellQuery = new SirenCellQuery(objectQuery);
         objectCellQuery.constraint = OBJECT_CELL
 
-        SirenTupleQuery query = new SirenTupleQuery()
+        Query query = new SirenTupleQuery()
         query.add(predicateCellQuery, SirenTupleClause.Occur.MUST)
-        query.add(objectCellQuery, SirenTupleClause.Occur.MUST)
+        if (params.query) {
+            query.add(objectCellQuery, SirenTupleClause.Occur.MUST)
+        }
+
+        if (params.relatedUri) {
+            BooleanQuery booleanQuery = new BooleanQuery()
+            SirenCellQuery relatedObjectCellQuery = new SirenCellQuery(
+                    new SirenTermQuery(new Term(TRIPLES_FIELD, params.relatedUri.toLowerCase())));
+            relatedObjectCellQuery.constraint = OBJECT_CELL
+
+            booleanQuery.add(query, Occur.MUST)
+            booleanQuery.add(relatedObjectCellQuery, Occur.MUST)
+
+            query = booleanQuery
+        }
 
         def s = new Date().time
         List results = executeQuery(query)
