@@ -20,6 +20,7 @@ import org.apache.lucene.index.Term
 import org.sindice.siren.search.SirenTermQuery
 import org.openrdf.model.vocabulary.RDFS
 import org.sindice.siren.search.SirenPrimitiveQuery
+import org.sindice.siren.search.SirenPhraseQuery
 
 class SirenController {
     static final String TRIPLES_FIELD = 'triples'
@@ -42,8 +43,17 @@ class SirenController {
         SirenCellQuery predicateCellQuery = new SirenCellQuery(predicateTermQuery);
         predicateCellQuery.constraint = PREDICATE_CELL
 
-        SirenPrimitiveQuery termQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, params.query.toLowerCase()))
-        SirenCellQuery objectCellQuery = new SirenCellQuery(termQuery);
+        SirenPrimitiveQuery objectQuery
+        if (params.query.indexOf(' ') > 0) {
+            objectQuery = new SirenPhraseQuery()
+            params.query.split(' ').each {
+                objectQuery.add(new Term(TRIPLES_FIELD, it.toLowerCase()))
+            }
+        } else {
+            objectQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, params.query.toLowerCase()))
+
+        }
+        SirenCellQuery objectCellQuery = new SirenCellQuery(objectQuery);
         objectCellQuery.constraint = OBJECT_CELL
 
         SirenTupleQuery query = new SirenTupleQuery()

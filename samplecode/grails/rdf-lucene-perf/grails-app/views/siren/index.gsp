@@ -41,25 +41,19 @@
 <ul>
     <li>Exact Match</li>
     <ul>
-        <% def queryString = '"High affinity immunoglobulin epsilon receptor subunit alpha"' %>
+        <% def queryString = 'High affinity immunoglobulin epsilon receptor subunit alpha' %>
         <li><g:link action="query"
                     params="[query:queryString]">High affinity immunoglobulin epsilon receptor subunit alpha</g:link></li>
-        <% queryString = '"Proto-oncogene tyrosine-protein kinase ABL1"' %>
-        <li><g:link action="query"
-                    params="[query:queryString]">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>
-        <% queryString = '"Pyrin"' %>
+        %{--<% queryString = 'Proto-oncogene tyrosine-protein kinase ABL1' %>--}%
+        %{--<li><g:link action="query"--}%
+                    %{--params="[query:queryString]">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>--}%
+        <% queryString = 'Pyrin' %>
         <li><g:link action="query" params="[query:queryString]">Pyrin</g:link></li>
     </ul>
     <li>Partial Match</li>
     <ul>
         <li><g:link action="query" params="[query:'epsilon']">epsilon</g:link></li>
         <li><g:link action="query" params="[query:'abl1']">abl1</g:link></li>
-    </ul>
-    <li>Query Parser</li>
-    <ul>
-        <li><g:link action="query" params="[query:'epsilon AND receptor']">epsilon OR receptor</g:link></li>
-        <li><g:link action="query" params="[query:'abl1 AND kinase']">abl1 AND kinase</g:link></li>
-        <li><g:link action="query" params="[query:'abl*']">abl*</g:link></li>
     </ul>
 </ul>
 <g:link action="buildIndex">Rebuild index</g:link>

@@ -19,11 +19,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${session[sessionVariable]?.sort()?.reverse()}" status="i" var="timing">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td>${timing}</td>
-                        </tr>
-                    </g:each>
                     <g:if test="${session[sessionVariable]}">
                         <tr>
                             <td>Avg: <g:formatNumber
@@ -31,6 +26,11 @@
                                     type="number"/></td>
                         </tr>
                     </g:if>
+                    <g:each in="${session[sessionVariable]?.sort()?.reverse()}" status="i" var="timing">
+                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                            <td>${timing}</td>
+                        </tr>
+                    </g:each>
                     </tbody>
                 </table>
             </td>
