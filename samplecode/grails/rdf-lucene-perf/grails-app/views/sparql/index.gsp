@@ -45,14 +45,16 @@
 <ul>
     <li>Exact Match</li>
     <ul>
-        <li>High affinity immunoglobulin epsilon receptor subunit alpha</li>
-        <li>Proto-oncogene tyrosine-protein kinase ABL1</li>
-        <li>Pyrin</li>
+        <li><g:link action="query"
+                    params="[query:'High affinity immunoglobulin epsilon receptor subunit alpha', type:'Exact']">High affinity immunoglobulin epsilon receptor subunit alpha</g:link></li>
+        <li><g:link action="query"
+                    params="[query:'Proto-oncogene tyrosine-protein kinase ABL1', type:'Exact']">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>
+        <li><g:link action="query" params="[query:'Pyrin', type:'Exact']">Pyrin</g:link></li>
     </ul>
     <li>Partial Match</li>
     <ul>
-        <li>epsilon receptor</li>
-        <li>ABL1</li>
+        <li><g:link action="query" params="[query:'epsilon receptor', type:'Partial']">epsilon receptor</g:link></li>
+        <li><g:link action="query" params="[query:'ABL1', type:'Partial']">Abl1</g:link></li>
     </ul>
 </ul>
 </body>

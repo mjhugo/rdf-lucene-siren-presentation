@@ -39,17 +39,13 @@
 
 <p>Sample Queries</p>
 <ul>
-    <li>Exact Match</li>
-    <ul>
-        <li>High affinity immunoglobulin epsilon receptor subunit alpha</li>
-        <li>Proto-oncogene tyrosine-protein kinase ABL1</li>
-        <li>Pyrin</li>
-    </ul>
     <li>Partial Match</li>
     <ul>
-        <li>epsilon receptor</li>
-        <li>ABL1</li>
+        <li><g:link action="query" params="[query:'epsilon receptor']">epsilon receptor</g:link></li>
+        <li><g:link action="query" params="[query:'abl1']">abl1</g:link></li>
     </ul>
 </ul>
+<g:link action="buildIndex">Rebuild index</g:link>
+
 </body>
 </html>
