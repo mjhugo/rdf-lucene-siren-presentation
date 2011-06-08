@@ -11,7 +11,7 @@ class TimingFilters {
                 if (model && model.time != null) {
                     if (request.requestURI.indexOf('sparql') > 1) {
                         addTimingToSession('sparql', model.time, session)
-                    } else if (request.requestURI.indexOf('lucene') > 1) {
+                    } else if (request.requestURI.indexOf('lucene/') > 1) {
                         addTimingToSession('lucene', model.time, session)
                     } else if (request.requestURI.indexOf('siren') > 1) {
                         addTimingToSession('siren', model.time, session)

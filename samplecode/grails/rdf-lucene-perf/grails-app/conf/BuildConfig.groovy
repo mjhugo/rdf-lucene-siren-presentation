@@ -17,9 +17,9 @@ grails.project.dependency.resolution = {
         mavenRepo 'http://repo.aduna-software.org/maven2/releases/'
 
         // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
+        // from public Maven repositories 
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
         runtime 'org.openrdf.sesame:sesame-runtime:2.4.0'
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'org.apache.lucene:lucene-core:3.0.3'
+        runtime 'org.apache.lucene:lucene-core:3.1.0' 
         runtime 'org.apache.lucene:lucene-regex:3.0.3'
 
 

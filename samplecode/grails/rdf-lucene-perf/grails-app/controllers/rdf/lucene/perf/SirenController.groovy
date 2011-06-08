@@ -14,10 +14,20 @@ import org.openrdf.rio.ntriples.NTriplesWriter
 import org.openrdf.model.impl.URIImpl
 import org.sindice.siren.analysis.TupleAnalyzer
 import org.apache.lucene.util.Version
+import org.sindice.siren.search.SirenTupleClause
+import org.sindice.siren.search.SirenTupleQuery
+import org.apache.lucene.index.Term
+import org.sindice.siren.search.SirenTermQuery
+import org.openrdf.model.vocabulary.RDFS
+import org.sindice.siren.search.SirenPrimitiveQuery
 
 class SirenController {
     static final String TRIPLES_FIELD = 'triples'
     static final String SUBJECT_URI_FIELD = 'subjecturi'
+
+    Integer SUBJECT_CELL = 0
+    Integer PREDICATE_CELL = 1
+    Integer OBJECT_CELL = 2
 
     public static final String sirenIndexDir = 'target/siren-index'
 
@@ -28,8 +38,17 @@ class SirenController {
     def index = { }
 
     def query = {
+        SirenPrimitiveQuery predicateTermQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, RDFS.LABEL.stringValue()))
+        SirenCellQuery predicateCellQuery = new SirenCellQuery(predicateTermQuery);
+        predicateCellQuery.constraint = PREDICATE_CELL
 
-        SirenCellQuery query = new SirenCellQuery()
+        SirenPrimitiveQuery termQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, params.query.toLowerCase()))
+        SirenCellQuery objectCellQuery = new SirenCellQuery(termQuery);
+        objectCellQuery.constraint = OBJECT_CELL
+
+        SirenTupleQuery query = new SirenTupleQuery()
+        query.add(predicateCellQuery, SirenTupleClause.Occur.MUST)
+        query.add(objectCellQuery, SirenTupleClause.Occur.MUST)
 
         def s = new Date().time
         List results = executeQuery(query)
@@ -40,7 +59,7 @@ class SirenController {
 
 
     public List executeQuery(Query query) {
-        IndexSearcher searcher = luceneSearcherManager.get()
+        IndexSearcher searcher = sirenSearcherManager.get()
         ScoreDoc[] scoreDocs = searcher.search(query, 10).scoreDocs
         List results = []
         def connection = repository.connection
