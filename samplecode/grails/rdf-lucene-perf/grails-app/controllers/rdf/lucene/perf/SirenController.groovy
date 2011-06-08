@@ -39,16 +39,13 @@ class SirenController {
     def index = { }
 
     def query = {
-        SirenPrimitiveQuery predicateTermQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, RDFS.LABEL.stringValue()))
-        SirenCellQuery predicateCellQuery = new SirenCellQuery(predicateTermQuery);
+        SirenCellQuery predicateCellQuery = new SirenCellQuery(
+                new SirenTermQuery(new Term(TRIPLES_FIELD, RDFS.LABEL.stringValue())));
         predicateCellQuery.constraint = PREDICATE_CELL
 
         SirenPrimitiveQuery objectQuery
         if (params.query.indexOf(' ') > 0) {
-            objectQuery = new SirenPhraseQuery()
-            params.query.split(' ').each {
-                objectQuery.add(new Term(TRIPLES_FIELD, it.toLowerCase()))
-            }
+            objectQuery = buildPhraseQuery()
         } else {
             objectQuery = new SirenTermQuery(new Term(TRIPLES_FIELD, params.query.toLowerCase()))
 
@@ -67,6 +64,13 @@ class SirenController {
         render(view: 'index', model: [results: results, time: e - s])
     }
 
+    SirenPrimitiveQuery buildPhraseQuery() {
+        def query = new SirenPhraseQuery()
+        params.query.split(' ').each {
+            query.add(new Term(TRIPLES_FIELD, it.toLowerCase()))
+        }
+        return query
+    }
 
     public List executeQuery(Query query) {
         IndexSearcher searcher = sirenSearcherManager.get()
@@ -105,13 +109,17 @@ class SirenController {
             sparqlQueryService.executeForEach(repository, subjectUris) {
                 def doc = new Document()
 
-                doc.add(new Field(SUBJECT_URI_FIELD, it.uri.stringValue(), Field.Store.YES, Field.Index.ANALYZED))
+                String subjectUri = it.uri.stringValue()
+                doc.add(new Field(SUBJECT_URI_FIELD, subjectUri,
+                        Field.Store.YES, Field.Index.ANALYZED))
 
                 StringWriter triplesStringWriter = new StringWriter()
                 NTriplesWriter nTriplesWriter = new NTriplesWriter(triplesStringWriter)
-                connection.exportStatements(new URIImpl(it.uri.stringValue()), null, null, false, nTriplesWriter)
+                connection.exportStatements(new URIImpl(subjectUri),
+                        null, null, false, nTriplesWriter)
 
-                doc.add(new Field(TRIPLES_FIELD, triplesStringWriter.toString(), Field.Store.NO, Field.Index.ANALYZED))
+                doc.add(new Field(TRIPLES_FIELD, triplesStringWriter.toString(),
+                        Field.Store.NO, Field.Index.ANALYZED))
 
                 writer.addDocument(doc)
             }
