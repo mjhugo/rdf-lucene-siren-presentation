@@ -57,7 +57,7 @@
     </ul>
     <li>Query Parser</li>
     <ul>
-        <li><g:link action="query" params="[query:'epsilon AND receptor']">epsilon OR receptor</g:link></li>
+        <li><g:link action="query" params="[query:'epsilon OR receptor']">epsilon OR receptor</g:link></li>
         <li><g:link action="query" params="[query:'abl1 AND kinase']">abl1 AND kinase</g:link></li>
         <li><g:link action="query" params="[query:'abl*']">abl*</g:link></li>
     </ul>

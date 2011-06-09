@@ -28,7 +28,7 @@
                     </g:if>
                     <g:each in="${session[sessionVariable]?.sort()?.reverse()}" status="i" var="timing">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td>${timing}</td>
+                            <td><g:formatNumber number="${timing}" type="number"/></td>
                         </tr>
                     </g:each>
                     </tbody>
