@@ -11,7 +11,7 @@
     Related SubjectURI: <g:textField name="relatedUri" value="${params.relatedUri}" style="width: 400px;"/><br>
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
-<p>Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
+<p style="background-color: yellow; padding: 5px;">Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
 <g:if test="${results}">
     <div class="list">
         <table>
@@ -58,10 +58,10 @@
     <ul>
         <li><g:link action="query"
                     params="[query:'',
-                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities related to http://www4.wiwiss.fu-berlin.de/diseasome/page/diseases/673</g:link></li>
+                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities related to ABL1 (http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1)</g:link></li>
         <li><g:link action="query"
                     params="[query:'imatinib',
-                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities with the text "imatnib" in the label related to http://www4.wiwiss.fu-berlin.de/diseasome/page/diseases/673</g:link></li>
+                    relatedUri:'http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1']">Query for entities with the text "imatnib" in the label related to Abl1 (http://www4.wiwiss.fu-berlin.de/diseasome/resource/genes/ABL1)</g:link></li>
     </ul>
 </ul>
 <g:link action="buildIndex">Rebuild index</g:link>

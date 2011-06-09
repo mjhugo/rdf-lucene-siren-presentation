@@ -13,7 +13,9 @@ class SparqlController {
         String queryString
         if (params.type == 'Exact') {
             queryString = """
-                SELECT ?uri ?type ?label WHERE {
+                SELECT ?uri ?type ?label
+                ${params.from ? ('FROM <' + params.from + '>') : ''}
+                WHERE {
                   ?uri rdfs:label ?label .
                   ?uri rdf:type ?type .
                   FILTER (?label = '${params.query}')
@@ -21,7 +23,9 @@ class SparqlController {
                 """
         } else {
             queryString = """
-                SELECT ?uri ?type ?label WHERE {
+                SELECT ?uri ?type ?label
+                ${params.from ? ('FROM <' + params.from +'>') : ''}
+                WHERE {
                   ?uri rdfs:label ?label .
                   ?uri rdf:type ?type .
                   FILTER regex(?label, '\\\\Q${params.query}\\\\E', 'i')

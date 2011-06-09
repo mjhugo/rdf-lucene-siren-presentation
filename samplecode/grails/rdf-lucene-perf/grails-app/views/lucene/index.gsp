@@ -10,7 +10,7 @@
     Query: <g:textField name="query" value="${params.query}" style="width: 400px;"/><br>
     <g:submitButton value="Submit" name="Submit"/>
 </g:form>
-<p>Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
+<p style="background-color: yellow; padding: 5px;">Query took <g:formatNumber number="${(time?:0)}" type="number"/>ms</p>
 <g:if test="${results}">
     <div class="list">
         <table>
