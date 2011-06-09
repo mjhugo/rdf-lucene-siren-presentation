@@ -44,7 +44,7 @@
 
 <p>Sample Queries</p>
 <ul>
-    <li>Exact Match From Context</li>
+    <li>Exact Match From Context (800,000 triples)</li>
     <ul>
         <li><g:link action="query"
                     params="[query:'High affinity immunoglobulin epsilon receptor subunit alpha', type:'Exact', from:'http://rdf.entagen.com/drugbank']">High affinity immunoglobulin epsilon receptor subunit alpha</g:link></li>
@@ -52,7 +52,7 @@
                     params="[query:'Proto-oncogene tyrosine-protein kinase ABL1', type:'Exact', from:'http://rdf.entagen.com/drugbank']">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>
         <li><g:link action="query" params="[query:'Pyrin', type:'Exact', from:'http://rdf.entagen.com/drugbank']">Pyrin</g:link></li>
     </ul>
-    <li>Exact Match</li>
+    <li>Exact Match (10,000,000 triples)</li>
     <ul>
         <li><g:link action="query"
                     params="[query:'High affinity immunoglobulin epsilon receptor subunit alpha', type:'Exact']">High affinity immunoglobulin epsilon receptor subunit alpha</g:link></li>
@@ -60,7 +60,7 @@
                     params="[query:'Proto-oncogene tyrosine-protein kinase ABL1', type:'Exact']">Proto-oncogene tyrosine-protein kinase ABL1</g:link></li>
         <li><g:link action="query" params="[query:'Pyrin', type:'Exact']">Pyrin</g:link></li>
     </ul>
-    <li>Partial Match</li>
+    <li>Partial Match (10,000,000 triples)</li>
     <ul>
         <li><g:link action="query" params="[query:'epsilon receptor', type:'Partial']">epsilon receptor</g:link></li>
         <li><g:link action="query" params="[query:'ABL1', type:'Partial']">Abl1</g:link></li>
